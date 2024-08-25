@@ -1,0 +1,41 @@
+{% extends 'teacherHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Subjectwise Report</h4>
+        <div class="container-fluid mt-2">
+            <h5 class="mt-3">Between Dates Report of uploaded Assignment</h5>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="col-sm-4">From Date</label>
+                    <input type="date" name="FromDate" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4">To Date</label>
+                    <input type="date" name="ToDate" class="form-control">
+                </div>
+
+                <label class="col-sm-4">Subject</label>
+                <div class="col-sm-12">
+                    <select class="form-control" name="subject">
+                        <option value="">Select Subject</option>
+                        {% for i in subject %}
+                        <option value="{{i.id}}">{{i.SubjectFullname}} ({{i.SubjectCode}})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                 <br>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

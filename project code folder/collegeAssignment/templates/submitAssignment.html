@@ -1,0 +1,86 @@
+{% extends 'studentHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid green;">Update Assignment</h5>
+        <div class="container-fluid mt-3">
+
+            <table border="1" class="table table-striped table-bordered first mt-5">
+                <tr>
+                    <td colspan="2"><span style="font-size : 20px; color : green">Assignment Number : </span>
+                        {{assignment.AssignmentNumber}}
+                    </td>
+
+                    <td colspan="2"><span style="font-size : 20px; color : green">Marks  :</span>
+                        {{assignment.AssignmentMarks}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Course</th>
+                    <td>{{assignment.course.CourseName}} ({{assignment.course.BranchName}})</td>
+
+                    <th>Subject Name</th>
+                    <td>{{assignment.subject.SubjectFullname}}</td>
+                </tr>
+
+                <tr>
+                    <th>Subject Code</th>
+                    <td>{{assignment.subject.SubjectCode}}</td>
+
+                    <th>Assignment Title</th>
+                    <td>{{assignment.AssignmentTitle}}</td>
+                </tr>
+
+                <tr>
+                    <th>Assignment Description</th>
+                    <td>{{assignment.AssignmentDescription}}</td>
+
+                    <th>Last Date of Submission</th>
+                    <td>{{assignment.SubmissionDate}}</td>
+                </tr>
+
+                <tr>
+                    <th>View Assignment Paper</th>
+                    <td colspan="3"><a href="{{assignment.AssignmentFile.url}}" class="text-danger">View Assignment
+                        Paper</a></td>
+                </tr>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <tr>
+                        <th>Assignment Description</th>
+                        <td colspan="3"><textarea name="Assdesc" class="form-control" required></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <th>Upload Answer File</th>
+                        <td colspan="3"><input type="file" name="AnswerFile" class="form-control"></td>
+                    </tr>
+
+                    <tr align="center">
+                        <td colspan="4">
+                            <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% if error ==  "no" %}
+<script>
+    alert('Assignment Submitted Successfully');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-3 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Edit News</h4>
+        <div class="container-fluid mt-3">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <label class="col-sm-4">Title</label>
+                    <input type="text" name="Title" value="{{news.Title}}" class="form-control">
+
+                    <label class="col-sm-4">Description</label>
+                    <textarea name="Description" class="form-control">{{news.Description}}</textarea>
+
+                    <br>
+                    <input type="submit" value="Update" class="btn btn-primary">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if error ==  "no" %}
+<script>
+    alert('News has been Updated');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}

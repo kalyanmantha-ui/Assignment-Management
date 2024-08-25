@@ -1,0 +1,49 @@
+{% extends 'studentHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid green;">Upload Assignment</h5>
+        <div class="container-fluid mt-3">
+            <table class="table table-bordered table-sm">
+                <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Assignment Number</th>
+                    <th>Course Name</th>
+                    <th>Subject</th>
+                    <th>Assignment By</th>
+                    <th>Date of Submission</th>
+                    <th>Posting Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in uploadAssign %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.assignment.AssignmentNumber}}</td>
+                    <td>{{i.assignment.course.CourseName}}</td>
+                    <td>{{i.assignment.subject.SubjectFullname}}</td>
+                    <td>{{i.assignment.teacher.users.first_name}}</td>
+                    <td>{{i.SubmitDate}}</td>
+                    <td>{{i.assignment.CreationDate}}</td>
+
+                    {% if i.Marks == None %}
+                    <td>Unchecked Assignment</td>
+                    {% else %}
+                    <td>Checked Assignment</td>
+                    {% endif %}
+
+                    <td><a href="{% url 'viewsubmitAssign' i.id %}" class="btn btn-primary">View</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

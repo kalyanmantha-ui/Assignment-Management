@@ -1,0 +1,17 @@
+.bg-custom{
+ background-color : #304860;
+}
+.navbar-brand{
+  font-weight: bold;
+}
+
+.nav-link:hover{
+  color: yellow !important;
+  background-color:black;
+  border-radius:10px;
+}
+
+.navbar-brand:hover{
+  color: lightblue !important;
+
+}

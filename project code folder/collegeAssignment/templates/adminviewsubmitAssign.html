@@ -1,0 +1,93 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid green;">Assignment Details</h5>
+        <div class="container-fluid mt-3">
+
+            <table border="1" class="table table-striped table-bordered first mt-5">
+                <tr>
+                    <td colspan="2"><span style="font-size : 20px; color : green">Assignment Number : </span>
+                        {{uploadAssign.assignment.AssignmentNumber}}
+                    </td>
+
+                    <td colspan="2"><span style="font-size : 20px; color : green">Marks  :</span>
+                        {{uploadAssign.assignment.AssignmentMarks}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4"><span style="font-size : 15px; color: blue"><center>Submitted By {{uploadAssign.userdetail.user.first_name}} {{uploadAssign.userdetail.user.last_name}} (Roll No. {{uploadAssign.userdetail.RollNumber}})</center> </span></td>
+                </tr>
+
+                <tr>
+                    <th>Course</th>
+                    <td>{{uploadAssign.assignment.course.CourseName}} ({{uploadAssign.assignment.course.BranchName}})</td>
+
+                    <th>Subject Name</th>
+                    <td>{{uploadAssign.assignment.subject.SubjectFullname}}</td>
+                </tr>
+
+                <tr>
+                    <th>Subject Code</th>
+                    <td>{{uploadAssign.assignment.subject.SubjectCode}}</td>
+
+                    <th>Assignment Title</th>
+                    <td>{{uploadAssign.assignment.AssignmentTitle}}</td>
+                </tr>
+
+                <tr>
+                    <th>Assignment Description</th>
+                    <td>{{uploadAssign.assignment.AssignmentDescription}}</td>
+
+                    <th>Last Date of Submission</th>
+                    <td>{{uploadAssign.assignment.SubmissionDate}}</td>
+                </tr>
+
+                <tr>
+                    <th>View Assignment Paper</th>
+                    <td colspan="3"><a href="{{uploadAssign.assignment.AssignmentFile.url}}" class="text-danger">View Assignment
+                        Paper</a></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4"><span style="font-size : 20px; color : green"><center>Submitted Assignment Details</center> </span></td>
+                </tr>
+
+                <tr>
+                    <th>Assignment Description</th>
+                    <td colspan="3">{{uploadAssign.Assdesc}}</td>
+                </tr>
+
+                <tr>
+                    <th>View Submitted Answer Paper</th>
+                    <td colspan="3"><a href="{{uploadAssign.AnswerFile.url}}" class="text-primary"><center>View Answer Paper </center></a></td>
+                </tr>
+
+                <tr>
+                    {% if uploadAssign.Marks == None %}
+                    <th>Marks</th>
+                    <td>Not Updated Yet</td>
+                    {% else %}
+                    <th>Marks</th>
+                    <td>{{uploadAssign.Marks}}</td>
+                    {% endif %}
+
+                    {% if uploadAssign.Remarks == None %}
+                    <th>Remarks</th>
+                    <td>Not Updated Yet</td>
+                    {% else %}
+                    <th>Remarks</th>
+                    <td>{{uploadAssign.Remarks}}</td>
+                    {% endif %}
+
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

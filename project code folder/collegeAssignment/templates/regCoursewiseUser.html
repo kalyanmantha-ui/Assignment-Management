@@ -1,0 +1,38 @@
+{% extends 'teacherHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Registered Users</h4>
+        <div class="container-fluid mt-2">
+            <table class="table table-bordered table-sm">
+                <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Full Name</th>
+                    <th>Course Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email ID</th>
+                    <th>Roll No</th>
+                    <th>Registration Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in userDtls %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.user.first_name}} {{i.user.last_name}}</td>
+                    <td>{{i.course.CourseName}} ({{i.course.BranchName}})</td>
+                    <td>{{i.MobileNumber}}</td>
+                    <td>{{i.user.username}}</td>
+                    <td>{{i.RollNumber}}</td>
+                    <td>{{i.RegDate}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

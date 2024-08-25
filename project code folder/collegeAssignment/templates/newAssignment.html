@@ -1,0 +1,45 @@
+{% extends 'studentHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid green;">New Assignment</h5>
+        <div class="container-fluid mt-3">
+            <table class="table table-bordered table-sm">
+                <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Assignment Number</th>
+                    <th>Course Name</th>
+                    <th>Subject</th>
+                    <th>Assignment By</th>
+                    <th>Date of Submission</th>
+                    <th>Posting Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                   {% for i in assignment %}
+                   <tr>
+                       <td>{{forloop.counter}}</td>
+                       <td>{{i.AssignmentNumber}}</td>
+                       <td>{{i.course.CourseName}}</td>
+                       <td>{{i.subject.SubjectFullname}}</td>
+                       <td>{{i.teacher.users.first_name}} {{i.teacher.users.last_name}}</td>
+                       <td>{{i.SubmissionDate}}</td>
+                       <td>{{i.CreationDate}}</td>
+                       {% if i.id in li %}
+        <td>Submitted</td>
+        {% else %}
+                       <td><a href="{% url 'submitAssignment' i.id %}" class="btn btn-primary">View</a></td>
+                  {% endif %}
+                   </tr>
+                   {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

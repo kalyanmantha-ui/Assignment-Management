@@ -1,0 +1,56 @@
+{% extends 'studentHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-3 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Update Profile</h4>
+        <div class="container-fluid mt-3">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <label class="col-sm-4">First Name</label>
+                    <input type="text" name="firstName" value="{{userDtls.user.first_name}}" class="form-control">
+
+                    <label class="col-sm-4">Last Name</label>
+                    <input type="text" name="lastName" value="{{userDtls.user.last_name}}" class="form-control">
+
+                    <label class="col-sm-4">Email</label>
+                    <input type="email" name="emailId" value="{{userDtls.user.username}}" class="form-control" readonly>
+
+                    <label class="col-sm-4">Mobile Number</label>
+                    <input type="text" name="MobileNumber" value="{{userDtls.MobileNumber}}" class="form-control">
+
+                    <label class="col-sm-4">Course</label>
+                    <input type="text" name="course" value="{{userDtls.course.CourseName}}({{userDtls.course.BranchName}})" class="form-control" readonly>
+
+                    <label class="col-sm-4">Roll Number</label>
+                    <input type="text" name="RollNumber" value="{{userDtls.RollNumber}}" class="form-control" readonly>
+
+                    <label class="col-sm-4">Registration Date</label>
+                    <input type="text" name="RegDate" value="{{userDtls.RegDate}}" class="form-control" readonly>
+
+                    <br>
+                    <input type="submit" value="Update" class="btn btn-primary">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if error ==  "no" %}
+<script>
+    alert('Student Profile has been Updated');
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+
+{% endblock %}

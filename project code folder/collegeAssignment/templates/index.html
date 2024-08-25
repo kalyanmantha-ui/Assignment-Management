@@ -1,0 +1,90 @@
+{% include 'navigation.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Directory Management System</title>
+    <style>
+    /*scroll button start*/
+#scrollbtn
+{
+
+position:fixed;
+bottom:20px;
+right:40px;
+z-index:99;
+border:none;
+color:red;
+background:#00abff;
+padding:10px;
+border-radius:10px;
+}
+/*scroll button end*/
+
+    </style>
+</head>
+
+<body>
+<img src="{% static 'images/home.jpg' %}" width="100%" height="550">
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card shadow mt-3">
+                <div class="card-body" style="background-color: #d7ccc8; height: 350px;">
+                    <h2 class="p-2 text-danger">Notice By College : </h2>
+                    <marquee width="100%" direction="up" height="80%">
+                        {% for i in news %}
+                        <div class="card p-5">
+                            <h4> {{i.Title}}</h4>
+                            <p> {{i.Description}}</p>
+                            <p><span style="color: blue"> {{i.CreationDate}} </span></p>
+                        </div>
+                        {% endfor %}
+                    </marquee>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+
+<div class="container-fluid" style=" height : 100px ; background-color : black">
+    <br><br>
+    <p class="text-center text-white"> <script>
+				document.write(new Date().getFullYear());
+			</script> &copy; Online College Assignment System</p>
+</div>
+
+
+<!--scrolltop start-->
+<div class="scrolltop float-right">
+    <i class="fa fa-arrow-up" onclick="topFunction()" id="scrollbtn"></i>
+</div>
+<script>
+  scrollbutton = document.getElementById("scrollbtn");
+  window.onscroll = function(){scrollFunction()};
+
+  function scrollFunction()
+  {
+  if(document.body.scrollTop>20 || document.documentElement.scrollTop>20)
+  {
+  scrollbutton.style.display="block";
+  }
+  else
+  {
+  scrollbutton.style.display="none";
+  }
+  }
+
+  function topFunction()
+  {
+  document.body.scrollTop = 0;//safari
+  document.documentElement.scrollTop = 0;//for chrome
+  }
+
+</script>
+
+</body>
+</html>

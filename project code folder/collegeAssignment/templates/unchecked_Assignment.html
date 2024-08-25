@@ -1,0 +1,76 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Subject</h4>
+        <div class="container-fluid mt-2">
+            <form method="post">
+                {% csrf_token %}
+
+                <label>Subject</label>
+                <select class="form-control form-control-sm" name="subject" required>
+                    <option value="">Select Subject</option>
+                    {% for i in subject %}
+                    <option value="{{i.id}}">{{i.SubjectFullname}} ({{i.SubjectCode}})</option>
+                    {% endfor %}
+
+                </select>
+
+                <br>
+                <input type="submit" value="Submit" class="btn btn-primary">
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% if uploadassignment %}
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <h5 class="p-2" style="border-bottom: 2px solid green;">Unchecked Assignment</h5>
+        <div class="container-fluid mt-3">
+            <h4 align="center">Result against "{{teachersubject.SubjectFullname}}" keyword </h4>
+            <hr/>
+            <table class="table table-bordered table-sm">
+                <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Assignment Number</th>
+                    <th>Course Name</th>
+                    <th>Subject</th>
+                    <th>Submitted By</th>
+                    <th>Submitted Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in uploadassignment  %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.assignment.AssignmentNumber}}</td>
+                    <td>{{i.assignment.subject.course.CourseName}} ({{i.assignment.subject.course.BranchName}})</td>
+                    <td>{{i.assignment.subject.SubjectFullname}}</td>
+                    <td>{{i.userdetail.user.first_name}} {{i.userdetail.user.last_name}}</td>
+                    <td>{{i.SubmitDate}}</td>
+                    <td><a href="{% url 'adminviewsubmitAssign' i.id %}" class="text-primary">View</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8"> No record found against this search</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endif %}
+
+{% endblock %}

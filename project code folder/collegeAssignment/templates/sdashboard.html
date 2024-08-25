@@ -1,0 +1,33 @@
+{% extends 'studentHeader.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2">
+    <div class="card-body">
+        <center><h5 class="p-2">Hello {{request.user.first_name}} {{request.user.last_name}} !! Welcome to Student
+            Panel.</h5></center>
+    </div>
+</div>
+
+<div class="card shadow mt-2 offset-2">
+    <div class="card-body">
+        <h5 class="p-2"><u><span style="color: blue">Notice Board</span></u></h5>
+
+        {% for i in teacherNews%}
+
+        <div class="media border p-3">
+            <img src="{{i.teacher.ProfilePic.url}}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:70px;">
+            <div class="media-body">
+                <h4>{{i.teacher.users.first_name}} {{i.teacher.users.last_name}} <small><i>{{i.CreationDate}}</i></small></h4>
+                <h5>{{i.Title}}</h5>
+                <p>{{i.Description}}</p>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

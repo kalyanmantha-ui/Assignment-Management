@@ -1,0 +1,54 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-5 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Assginment</h4>
+        <div class="container-fluid mt-2">
+            <h5 align="center" style="color:blue">Report from <span style="color:red">{{fd}}</span> to <span
+                    style="color:red">{{td}}</span></h5>
+            <table class="table table-bordered table-sm mt-5">
+                <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Assignment Number</th>
+                    <th>Teacher Name</th>
+                    <th>Course Name</th>
+                    <th>Subject</th>
+                    <th>Submitted By</th>
+                    <th>Submitted Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in uploadass %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.assignment.AssignmentNumber}}</td>
+                    <td>{{i.assignment.teacher.users.first_name}} {{i.assignment.teacher.users.last_name}}</td>
+                    <td>{{i.assignment.course.CourseName}} ({{i.assignment.course.BranchName}})</td>
+                    <td>{{i.assignment.subject.SubjectFullname}} ({{i.assignment.subject.SubjectCode}})</td>
+                    <td>{{i.userdetail.user.first_name}} {{i.userdetail.user.last_name}}</td>
+                    <td>{{i.SubmitDate}}</td>
+
+                    {% if i.Marks == None %}
+                    <td>Unchecked Assignment</td>
+                    {% else %}
+                    <td>Checked Assignment</td>
+                    {% endif %}
+
+                    <td><a href="{% url 'adminviewsubmitAssign' i.id %}">View</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8"> No record found against this search</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

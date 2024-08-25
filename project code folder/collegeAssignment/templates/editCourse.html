@@ -1,0 +1,38 @@
+{% extends 'header.html' %}
+{% block main %}
+
+<div class="card shadow mt-3 offset-2" style="min-height: 90vh">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 2px solid green;">Edit Course</h4>
+        <div class="container-fluid mt-3">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <label>Course Name</label>
+                    <input type="text" name="CourseName" value="{{course.CourseName}}" class="form-control">
+                    <br>
+                    <label>Branch Name</label>
+                    <input type="text" name="BranchName" value="{{course.BranchName}}" class="form-control">
+                    <br>
+                    <input type="submit" value="Update" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% if error ==  "no" %}
+<script>
+    alert('Course has been Updated');
+    window.location=('{% url 'course' %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}
